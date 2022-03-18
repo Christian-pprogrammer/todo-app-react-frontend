@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Home from './components/Home';
 import Todos from './components/Todos';
+import Logout from './components/Logout';
 import TodoItem from './components/TodoItem';
 import UserProvider from './context/userContext';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/todo/:id' element={<TodoItem />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
         </Routes>
     </Router>
     </UserProvider>
