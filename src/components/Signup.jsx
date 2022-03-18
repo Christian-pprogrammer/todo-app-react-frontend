@@ -1,13 +1,19 @@
-import React, {useState} from 'react'
-import useFetch from '../hooks/useFetch';
-import { Spinner } from '@chakra-ui/react';
-
+import React, {useContext, useState} from 'react'
+// import useFetch from '../hooks/useFetch';
+// import { Spinner } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { userContext } from '../context/userContext';
 function Signup() {
+  const {isLoggedIn, setLoggedIn} = useContext(userContext);
+  console.log(isLoggedIn)
+  const navigate = useNavigate();
+  if(isLoggedIn) {
+    navigate('/');
+  }
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -26,7 +32,10 @@ function Signup() {
           }
       })
       const data = await res.json();
-      
+      if(data.token) {
+        setLoggedIn(data.token);
+        navigate('/home');
+      }
     }catch(err) {
       console.log(err);
     }finally{
