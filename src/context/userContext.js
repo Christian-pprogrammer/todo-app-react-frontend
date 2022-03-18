@@ -8,13 +8,17 @@ function UserProvider({children}) {
     localStorage.setItem('token', token);
     setIsLoggedIn(true);
   }
+  const logoutUser = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  }
   useEffect(()=>{
     if(localStorage.getItem('token')) {
         setIsLoggedIn(true);
     }
   },[]);
   return (
-    <userContext.Provider value={{isLoggedIn, setLoggedIn}}  >
+    <userContext.Provider value={{isLoggedIn, setLoggedIn, logoutUser}}  >
         {children}
     </userContext.Provider>
   )
